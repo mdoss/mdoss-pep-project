@@ -58,15 +58,27 @@ public class AccountService {
 
         return accountDAO.insertAccount(account);
     }
-
+    /**
+     * Checks database for an account
+     * @param account
+     * @return the account with matching username password in database. Null if doesn't exist
+     */
     public Account getAccount(Account account) {
         return accountDAO.getAccount(account);
     }
-
+    /**
+     * Checks database for an account by id
+     * @param account
+     * @return the account with matching account id in database. Null if doesn't exist
+     */
     public Account getAccountbyId(int account_id) {
         return accountDAO.getAccountById(account_id);
     }
-
+    /**
+     * Checks to see if the username is available
+     * @param username
+     * @return True if available
+     */
     private boolean checkUsernameAvailable(String username) {
         List<Account> accounts = accountDAO.getAllAccounts();
 

@@ -1,7 +1,6 @@
 package DAO;
 
 import Model.Account;
-import Model.Message;
 import Util.ConnectionUtil;
 
 import java.sql.*;
@@ -12,7 +11,7 @@ import java.util.List;
  * A DAO is a class that mediates the transformation of data between the format of objects in Java to rows in a
  * database. The methods here are mostly filled out, you will just need to add a SQL statement.
  *
- * We may assume that the database has already created a table named 'account'.
+ * We may assume that the database has alrea dy created a table named 'account'.
  * It contains similar values as the account class:
  * id, which is of type int and is a primary key,
  * username, which is of type varchar(255).
@@ -21,8 +20,8 @@ import java.util.List;
 public class AccountDAO {
 
     /**
-     * TODO: retrieve all Accounts from the Account table.
-     * You only need to change the sql String.
+     * retrieve all Accounts from the Account table.
+     * 
      * @return all Accounts.
      */
     public List<Account> getAllAccounts(){
@@ -54,8 +53,7 @@ public class AccountDAO {
     public Account insertAccount(Account account){
         Connection connection = ConnectionUtil.getConnection();
         try {
-//          Write SQL logic here. You should only be inserting with the name column, so that the database may
-//          automatically generate a primary key.
+//          Write SQL logic here.
             String sql = "INSERT INTO account(username, password) VALUES (?, ?);" ;
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 

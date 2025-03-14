@@ -3,7 +3,7 @@ package Service;
 import DAO.MessageDAO;
 import Model.Message;
 import Service.AccountService;
-import Model.Account;
+
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class MessageService {
     private AccountService accountService;
 
     /**
-     * No-args constructor for MessageService which creates a MessageDAO.
+     * No-args constructor for MessageService which creates a MessageDAO and AccountService.
      * There is no need to change this constructor.
      */
     public MessageService(){
@@ -40,17 +40,23 @@ public class MessageService {
         this.messageDAO = messageDAO;
     }
     /**
-     * TODO: Use the MessageDAO to retrieve all Messages.
+     *  Use the MessageDAO to retrieve all Messages.
      * @return all Messages.
      */
     public List<Message> getAllMessages() {
         return messageDAO.getAllMessages();
     }
-
+    /**
+     *  Search for single message by message iD.
+     * @return Message with matching message ID.
+     */
     public Message getMessageById(int message_id) {
         return messageDAO.getMessageById(message_id);
     }
-
+    /**
+     *  Search for ALL message by account iD.
+     * @return All Messages with matching account ID.
+     */
     public List<Message> getMessagesById(int account_id) {
         return messageDAO.getMessagesById(account_id);
     }
@@ -75,7 +81,6 @@ public class MessageService {
             return message;
         }
         return null;
-            
     }
 
     /**
@@ -96,13 +101,10 @@ public class MessageService {
         return messageDAO.updateMessageById(new Message(message.getMessage_id(), message.getPosted_by(), updatedText, message.getTime_posted_epoch()));
     }
 
-
     /**
      * 
      * The creation of the message will be successful if and only if the message_text is not blank, is not over 255 characters,
-     *  and posted_by refers to a real, existing user. If successful, the response body should contain a JSON of the message, 
-     * including its message_id. The response status should be 200, which is the default. 
-     * The new message should be persisted to the database.
+     *  and posted_by refers to a real, existing user. 
      * @param message a Message object.
      * @return Message if it was successfully persisted, null if it was not successfully persisted (eg if the Message primary
      * key was already in use.)
@@ -115,13 +117,6 @@ public class MessageService {
             return null;
         
         return messageDAO.insertMessage(message);
-    }
-    /**
-     * TODO: Use the MessageDAO to retrieve a list of all Messages that have a MessageCount above 0.
-     * @return all available Messages (MessageCount over zero)
-     */
-    public List<Message> getAllAvailableMessages() {
-        return messageDAO.getMessagesWithMessageCountOverZero();
     }
 
 }
